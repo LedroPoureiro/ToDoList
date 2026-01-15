@@ -1,14 +1,13 @@
 package com.projects.project2.services;
 
 import com.projects.project2.model.Status;
+import com.projects.project2.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.projects.project2.model.Task;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.projects.project2.repositories.TaskRepo;
+import com.projects.project2.repositories.TaskRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,30 +15,32 @@ import java.util.Optional;
 public class TaskService {
 
     @Autowired
-    TaskRepo taskRepo;
+    TaskRepository taskRepo;
 
-    public List<Task> getTasks()
+    public List<Task> getTasks(User user)
     {
-        return taskRepo.findAll();
+        return taskRepo.findByUser(user);
     }
 
-    public Task getTaskByID(int taskID)
+    public Task getTaskByID(int taskID, User user)
     {
-        return taskRepo.findById(taskID).orElse(null);
+        return taskRepo.findByIdAndUserId(taskID, user.getId()).orElse(null);
     }
 
-    public List<Task> getTasksByStatus(String statusStr)
-    {
-        Status status = Status.valueOf(statusStr.toUpperCase());
-        return taskRepo.findByStatus(status);
-    }
+//    public List<Task> getTasksByStatus(String statusStr)
+//    {
+//        Status status = Status.valueOf(statusStr.toUpperCase());
+//        return taskRepo.findByStatus(status);
+//    }
 
-    public Task createTask(String content, String dueDate)
+    public Task createTask(String title, String description, String dueDate, User user)
     {
         Task task = new Task();
-        task.setContent(content);
+        task.setTitle(title);
+        task.setDescription(description);
         task.setDueDate(LocalDate.parse(dueDate));
-        task.setStatus(Status.PENDING);
+        task.setCompleted(false);
+        task.setUser(user);
         return taskRepo.save(task);
     }
 
@@ -48,18 +49,21 @@ public class TaskService {
         taskRepo.deleteById(taskID);
     }
 
-    public Optional<Task> updateTask(int taskID, String content, String dueDate, String status)
+    public Optional<Task> updateTask(int taskID, String title, String description, String dueDate, Boolean completed)
     {
         return taskRepo.findById(taskID)
                 .map(task -> {
-                    if(content != null){
-                        task.setContent(content);
+                    if(title != null){
+                        task.setTitle(title);
+                    }
+                    if(description != null){
+                        task.setDescription(description);
                     }
                     if(dueDate != null) {
                         task.setDueDate(LocalDate.parse(dueDate));
                     }
-                    if(status != null) {
-                        task.setStatus(Status.valueOf(status.toUpperCase()));
+                    if(completed != null) {
+                        task.setCompleted(completed);
                     }
                     return taskRepo.save(task);
                 });
