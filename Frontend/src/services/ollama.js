@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:8080/message'
+const baseUrl = '/api/message'
 
 let token = null
 

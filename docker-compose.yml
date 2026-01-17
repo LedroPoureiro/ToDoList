@@ -1,5 +1,13 @@
 services:
-  app:
+  frontend:
+    build: ./Frontend
+    ports:
+      - "3000:80"
+    depends_on:
+        - backend
+    networks:
+      - s-network
+  backend:
       build: ./Backend
       ports:
         - "8080:8080"
@@ -22,7 +30,7 @@ services:
       networks:
         - s-network
       volumes:
-        - postgres-s-data:/var/lib/postgres/data
+        - postgres-s-data:/var/lib/postgresql
 
   ollama:
     image: ollama/ollama:latest
