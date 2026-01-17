@@ -1,0 +1,338 @@
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  background-color: #f5f5f5; 
+}
+
+.tasks {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-width: 600px;
+  width: 100%;
+  border: 2px solid black;
+}
+
+.tasks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.tasks-header h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.8rem;
+  pointer-events: none; 
+}
+
+.left-side {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.add-button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 0.9rem;   
+  font-weight: 600;
+  padding: 0.7rem 0.5rem;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 3px 8px rgba(76, 175, 80, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.add-button:hover {
+  background-color: #43a047;
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 6px 14px rgba(76, 175, 80, 0.4);
+}
+
+.add-button:active {
+  transform: translateY(1px) scale(0.96);
+}
+
+
+.task {
+  margin-bottom: 1rem; 
+  background-color: #fafafa;
+  border-radius: 10px;
+  padding: 1.2rem;
+  border: 1px solid #ddd;
+  text-align: left; 
+}
+
+.taskName {
+  font-size: 1.8rem; 
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word; 
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;             
+  gap: 1rem;                       
+}
+
+.taskInfo {
+  font-size: 0.95rem;
+  color: #666;
+  display: flex;
+  gap: 1.5rem; 
+  flex-wrap: wrap; 
+}
+
+.taskInfo span {
+  font-weight: 500;
+}
+
+.taskName button {
+  background-color: white;
+  color: red;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap; 
+}
+
+.taskName button:hover {
+  background-color: #fff0f0;
+  border-color: red;
+  box-shadow: 0 2px 6px rgba(255, 0, 0, 0.15);
+}
+
+a {
+  color: #2563eb;  
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #2563eb;  
+}
+
+a:hover {
+  color: #1d4ed8;  
+  text-decoration: none;
+}
+
+.login-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-width: 400px;
+  width: 100%;
+  border: 2px solid #ddd;
+}
+
+.llm {
+  background-color: white;
+  padding: 10rem;
+  margin-left: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 50px;
+  max-width: 100px;
+  width: 100%;
+  border: 2px solid black;
+}
+
+.create-form-wrapper {
+  display: flex;
+  justify-content: center;   /* centers the group */
+  align-items: center;       /* vertical */
+  gap: 24px;              /* space between the two forms */
+  min-height: 100vh;
+  /* align-items: flex-start; */
+  
+}
+
+.create-form-container {
+  flex: 1;                /* each form takes equal width */
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-width: 600px;
+  width: 100%;
+  border: 2px solid black;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.form-header h3 {
+  position: relative;
+  /* left: 50%; */
+  transform: translateX(-10%);
+  margin: 0;
+  font-size: 1.8rem;
+  pointer-events: none; 
+}
+
+.back-button {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:active {
+  transform: scale(0.98);
+}
+
+.form-header h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input,
+.form-group .react-datepicker-wrapper input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group .react-datepicker-wrapper input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.save-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.save-button:hover {
+  background-color: #43a047;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  transform: translateY(-2px);
+}
+
+.save-button:active {
+  transform: translateY(0);
+}
+
+.suggest-button {
+  background-color: rgb(177, 176, 176);
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.suggest-button:hover {
+  background-color: rgb(59, 59, 59);
+  box-shadow: 0 4px 12px rgba(2, 2, 2, 0.3);
+  transform: translateY(-2px);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.return-button {
+  background-color: #757575;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.return-button:hover {
+  background-color: #616161;
+  box-shadow: 0 4px 12px rgba(117, 117, 117, 0.3);
+  transform: translateY(-2px);
+}
+
+.return-button:active {
+  transform: translateY(0);
+}

@@ -1,15 +1,49 @@
-# IntelliJ
-/.idea/
-/*.iml
+# ======================================
+# Java / Maven / Spring Boot (backend)
+# ======================================
+target/
+mvnw
+mvnw.cmd
 
-# Build output
-/target/
-/out/
+# Spring Boot / IDE generated
+HELP.md
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+.apt_generated/
 
-# Logs
+# Logs and temp files
 *.log
+*.tmp
+logs/
 
-# OS files
-.DS_Store
-Thumbs.db
+# ======================================
+# Node.js / React (frontend)
+# ======================================
+node_modules/
+
+# Environment variables 
+.env
+
+# ======================================
+# IDE / Editor files (common for both)
+# ======================================
+.idea/                # IntelliJ
+*.iml
+*.iws
+
+.vscode/              # VS Code
+
+.classpath            # Eclipse
+.project
+.settings/
+
+# ======================================
+# Docker & Misc
+# ======================================
+*.dockerignore
+Dockerfile*           
 
