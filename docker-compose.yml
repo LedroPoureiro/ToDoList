@@ -14,7 +14,16 @@ services:
       networks:
         - s-network
       environment:
-        - SPRING_AI_OLLAMA_BASE_URL=http://ollama:11434
+        DATABASE_URL: ${DATABASE_URL}
+        DATABASE_USERNAME: ${DATABASE_USERNAME}
+        DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+              
+        JWT_SECRET: ${JWT_SECRET}
+              
+        OLLAMA_BASE_URL: http://ollama:11434
+        OLLAMA_MODEL: granite3-dense:latest
+              
+        CORS_ORIGINS: http://localhost:3000
       depends_on:
         - postgres
         - ollama
@@ -22,9 +31,9 @@ services:
   postgres:
       image: postgres:latest
       environment:
-        POSTGRES_USER: pedro
-        POSTGRES_PASSWORD: 1234
-        POSTGRES_DB: tasklist
+        POSTGRES_USER: ${DATABASE_USERNAME}
+        POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
       ports:
         - "5433:5432"
       networks:

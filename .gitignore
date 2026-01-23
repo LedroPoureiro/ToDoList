@@ -27,6 +27,7 @@ node_modules/
 
 # Environment variables 
 .env
+configs.env
 
 # ======================================
 # IDE / Editor files (common for both)
