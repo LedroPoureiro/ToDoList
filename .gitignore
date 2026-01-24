@@ -46,5 +46,4 @@ configs.env
 # Docker & Misc
 # ======================================
 *.dockerignore
-Dockerfile*           
 
