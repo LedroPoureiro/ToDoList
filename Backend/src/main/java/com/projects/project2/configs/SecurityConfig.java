@@ -50,8 +50,11 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        config.setAllowedOrigins(List.of(
+                "https://todolist-frontend-85ne.onrender.com",   // your actual frontend
+                "http://localhost:5173",                         // Vite dev server (adjust port if needed)
+                "http://localhost:3000"                          // if using CRA or serve
+        ));        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
