@@ -1,9 +1,12 @@
 import axios from 'axios'
 // const baseUrl = '/api'
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://todolist-2f9q.onrender.com';
+const API_URL = import.meta.env.DEV 
+  ? 'http://localhost:8080/api'
+  : 'https://todolist-2f9q.onrender.com/api';
 
 const login = async credentials => {
+  console.log(API_URL)
   const response = await axios.post(`${API_URL}/login`, credentials)
   return response.data
 }
