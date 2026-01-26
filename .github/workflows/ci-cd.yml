@@ -111,6 +111,14 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-      - name: Trigger Render Deployment
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for path filters if you use them
+
+      - name: Deploy Frontend (if changed)
+        if: github.event_name == 'push' && (contains(github.event.commits.*.modified, 'frontend/') || contains(github.event.commits.*.added, 'frontend/'))
+        run: curl "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
+
+      - name: Deploy Backend (if changed)
+        if: github.event_name == 'push' && (contains(github.event.commits.*.modified, 'backend/') || contains(github.event.commits.*.added, 'backend/'))
+        run: curl "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
