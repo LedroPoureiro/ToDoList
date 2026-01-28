@@ -19,23 +19,23 @@ import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final JwtService jwtUtil;
+    private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
-    private static final List<String> EXCLUDED_PATHS = Arrays.asList(
-            "/api/register",
-            "/api/login"
-    );
-
-    public JwtAuthenticationFilter(JwtService jwtUtil, UserDetailsService userDetailsService) {
-        this.jwtUtil = jwtUtil;
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService) {
+        this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (EXCLUDED_PATHS.stream().anyMatch(path::startsWith)) {
+
+        if (path.equals("/api/register") ||
+                path.equals("/api/login") ||
+                path.startsWith("/swagger-ui") ||
+                path.startsWith("/api-docs") ||
+                path.equals("/swagger-ui.html")) {
             chain.doFilter(request, response);
             return;
         }
@@ -46,12 +46,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = header.substring(7);
 
             try {
-                String username = jwtUtil.extractUsername(token);
+                String username = jwtService.extractUsername(token);
 
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                    if (jwtUtil.isTokenValid(token, userDetails)) {
+                    if (jwtService.isTokenValid(token, userDetails)) {
                         UsernamePasswordAuthenticationToken authToken =
                                 new UsernamePasswordAuthenticationToken(
                                         userDetails,

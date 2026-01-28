@@ -12,7 +12,6 @@ import llmService from './services/ollama'
 
 const App = () => {
   const [tasks, setTasks] = useState([])
-  const [visible, setVisible] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState('')
@@ -55,7 +54,6 @@ const App = () => {
     try {
       const newTask = await taskService.create(task)
       setTasks(prev => prev.concat(newTask))
-      setVisible(false)
       navigate('/tasks', { replace: true })
     }
     catch {
@@ -71,7 +69,6 @@ const App = () => {
           task.id === updatedTask.id ? updatedTask : task
         )
       );
-      setVisible(false)
     }
     catch {
       console.log("Error updating task")

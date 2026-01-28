@@ -42,7 +42,7 @@ jobs:
       #   working-directory: ./Backend
       #   run: mvn test
 
-      # Frontend build (tests commented out - uncomment when ready)
+      # Frontend build 
       - name: Install Frontend Dependencies
         working-directory: ./Frontend
         run: npm ci
@@ -51,7 +51,6 @@ jobs:
         working-directory: ./Frontend
         run: npm run build
 
-      # Uncomment when you have tests
       # - name: Run Frontend Tests
       #   working-directory: ./Frontend
       #   run: npm test -- --coverage --watchAll=false

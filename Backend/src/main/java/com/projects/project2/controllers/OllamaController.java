@@ -3,10 +3,14 @@ package com.projects.project2.controllers;
 import com.projects.project2.model.User;
 import com.projects.project2.model.dto.TaskDto;
 import com.projects.project2.repositories.TaskRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.ollama.OllamaChatModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +20,41 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-
+@Tag(name = "Ollama Controller", description = "Controller to interact with the LLM")
 public class OllamaController {
 
     private ChatClient chatClient;
-    @Autowired
     private TaskRepository repo;
+
+    public OllamaController(TaskRepository taskRepo)
+    {
+        this.repo = taskRepo;
+    }
 
     public OllamaController(OllamaChatModel chatModel){
         this.chatClient = ChatClient.create(chatModel);
     }
 
+    @Operation(
+            summary = "Retrieves a new task",
+            description = "Asks the LLM to suggest a new task"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully retrieved a task from LLM"
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized - Invalid or missing token",
+                    content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Could not retrieve a task from the LLM",
+                    content = @Content
+            )
+    })
     @GetMapping("/message")
     public ResponseEntity<String> suggestNewTask(@AuthenticationPrincipal User user){
         List<TaskDto> tasks = repo.findByUser(user).stream().map(task -> new TaskDto(task.getTitle(), task.getDescription(), task.getDueDate().toString(), task.isCompleted())).toList();
