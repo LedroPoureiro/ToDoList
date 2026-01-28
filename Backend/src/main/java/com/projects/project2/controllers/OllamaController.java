@@ -26,13 +26,10 @@ public class OllamaController {
     private ChatClient chatClient;
     private TaskRepository repo;
 
-    public OllamaController(TaskRepository taskRepo)
-    {
-        this.repo = taskRepo;
-    }
-
-    public OllamaController(OllamaChatModel chatModel){
+    public OllamaController(OllamaChatModel chatModel, TaskRepository taskRepo){
         this.chatClient = ChatClient.create(chatModel);
+        this.repo = taskRepo;
+
     }
 
     @Operation(
